@@ -1,76 +1,65 @@
-/*
- * @(#)PathTool.java
- *
- * Copyright (c) 1996-2010 The authors and contributors of JHotDraw.
- * You may not use, copy or modify this file, except in compliance with the
- * accompanying license terms.
- */
 package org.jhotdraw.samples.svg;
 
+import org.jhotdraw.draw.AttributeKey;
+import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.figure.BezierFigure;
-import java.util.*;
-import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.tool.BezierTool;
 import org.jhotdraw.samples.svg.figures.SVGBezierFigure;
 import org.jhotdraw.samples.svg.figures.SVGPathFigure;
 
-/**
- * Tool to scribble a SVGPath
- *
- * @author Werner Randelshofer
- * @version $Id$
- */
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class PathTool extends BezierTool {
 
     private static final long serialVersionUID = 1L;
-    /**
-     * Set this to true to turn on debugging output on System.out.
-     */
-    private static final boolean DEBUG = false;
-    /**
-     * The path prototype for new figures.
-     */
+    private static final Logger logger = Logger.getLogger(PathTool.class.getName());
+
     private SVGPathFigure pathPrototype;
 
-    /**
-     * Creates a new instance.
-     */
-    public PathTool(SVGPathFigure pathPrototype, SVGBezierFigure bezierPrototype) {
-        this(pathPrototype, bezierPrototype, null);
-    }
-
-    /**
-     * Creates a new instance.
-     */
     public PathTool(SVGPathFigure pathPrototype, SVGBezierFigure bezierPrototype, Map<AttributeKey<?>, Object> attributes) {
         super(bezierPrototype, attributes);
         this.pathPrototype = pathPrototype;
     }
 
-    @SuppressWarnings("unchecked")
     protected SVGPathFigure createPath() {
         SVGPathFigure f = pathPrototype.clone();
         getEditor().applyDefaultAttributesTo(f);
+        applyAttributes(f);
+        return f;
+    }
+
+    private void applyAttributes(SVGPathFigure figure) {
         if (attributes != null) {
             for (Map.Entry<AttributeKey<?>, Object> entry : attributes.entrySet()) {
-                f.set((AttributeKey<Object>) entry.getKey(), entry.getValue());
+                figure.set((AttributeKey<Object>) entry.getKey(), entry.getValue());
             }
         }
-        return f;
     }
 
     @Override
     protected void finishCreation(BezierFigure createdFigure, DrawingView creationView) {
-        if (DEBUG) {
-            System.out.println("PathTool.finishCreation " + createdFigure);
-        }
+        logDebug("PathTool.finishCreation " + createdFigure);
+
         creationView.getDrawing().remove(createdFigure);
         SVGPathFigure createdPath = createPath();
+        configurePath(createdPath, createdFigure, creationView);
+    }
+
+    private void logDebug(String message) {
+        if (logger.isLoggable(Level.FINE)) {
+            logger.fine(message);
+        }
+    }
+
+    private void configurePath(SVGPathFigure createdPath, BezierFigure createdFigure, DrawingView creationView) {
         createdPath.removeAllChildren();
         createdPath.add(createdFigure);
         creationView.getDrawing().add(createdPath);
         fireUndoEvent(createdPath, creationView);
         creationView.addToSelection(createdPath);
+
         if (isToolDoneAfterCreation()) {
             fireToolDone();
         }
