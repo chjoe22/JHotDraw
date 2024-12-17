@@ -20,7 +20,7 @@
                 <repository>
                     <id>github</id>
                     <name>GitHub sweat-tek Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/sweat-tek/MavenRepository</url>
+                    <url>https://maven.pkg.github.com/chjoe22/JHotDraw</url>
                 </repository>
             </repositories>
         </profile>
