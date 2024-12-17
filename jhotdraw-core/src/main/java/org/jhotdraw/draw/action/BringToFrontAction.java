@@ -19,50 +19,10 @@ import org.jhotdraw.util.ResourceBundleUtil;
  * @author Werner Randelshofer
  * @version $Id$
  */
-public class BringToFrontAction extends AbstractSelectedAction {
-
-    private static final long serialVersionUID = 1L;
-    public static final String ID = "edit.bringToFront";
-
-    /**
-     * Creates a new instance.
-     */
-    public BringToFrontAction(DrawingEditor editor) {
-        super(editor);
-        ResourceBundleUtil labels
-                = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-        labels.configureAction(this, ID);
-        updateEnabledState();
-    }
+public class BringToFrontAction implements ArrangeLayer{
 
     @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
-        bringToFront(super.getView(), );
-        fireUndoableEditHappened(new AbstractUndoableEdit() {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public String getPresentationName() {
-                ResourceBundleUtil labels
-                        = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-                return labels.getTextProperty(ID);
-            }
-
-            @Override
-            public void redo() throws CannotRedoException {
-                super.redo();
-                BringToFrontAction.bringToFront(view, figures);
-            }
-
-            @Override
-            public void undo() throws CannotUndoException {
-                super.undo();
-                SendToBackAction.sendToBack(view, figures);
-            }
-        });
-    }
-
-    public static void bringToFront(DrawingView view, Figure figure) {
+    public void execute(DrawingView view, Figure figure) {
         view.sendToFront(figure);
     }
 }
