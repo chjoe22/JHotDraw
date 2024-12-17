@@ -118,27 +118,6 @@ public class DefaultDrawingView
         IS_WINDOWS = b;
     }
 
-    @Override
-    public void repaintHandles() {
-        validateHandles();
-        Rectangle r = null;
-        for (Handle h : getSelectionHandles()) {
-            if (r == null) {
-                r = h.getDrawingArea();
-            } else {
-                r.add(h.getDrawingArea());
-            }
-        }
-        for (Handle h : getSecondaryHandles()) {
-            if (r == null) {
-                r = h.getDrawingArea();
-            } else {
-                r.add(h.getDrawingArea());
-            }
-        }
-        if (r != null) {
-            repaint(r);
-        }
     public void handleSendToBack(Figure figure) {
         ArrangeLayer command = new SendToBackAction();
         command.execute(editor.getActiveView(), figure);
