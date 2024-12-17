@@ -31,6 +31,6 @@ jobs:
           cache: maven
       - name: Build with Maven
         env:
-          USER_NAME: ${{ secrets.SECRET_USER_NAME }}
-          TOKEN: ${{ secrets.SECRET_USER_TOKEN }}
-        run: mvn clean install -DskipTests -Djava.awt.headless=true -s .maven-settings.xml -f pom.xml
+          USER_NAME: ${{ github.actor }}
+          TOKEN: ${{ github.token }}
+        run: mvn clean install -DskipTests -s .maven-settings.xml -f pom.xml
