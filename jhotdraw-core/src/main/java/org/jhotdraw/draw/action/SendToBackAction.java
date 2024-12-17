@@ -19,7 +19,7 @@ import org.jhotdraw.util.ResourceBundleUtil;
  * @author Werner Randelshofer
  * @version $Id$
  */
-public class SendToBackAction extends AbstractSelectedAction {
+public class SendToBackAction extends AbstractSelectedAction implements ArrangeLayer {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.sendToBack";
@@ -35,11 +35,11 @@ public class SendToBackAction extends AbstractSelectedAction {
         updateEnabledState();
     }
 
+    private List<Figure> figures = new ArrayList<>();
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-        final DrawingView view = getView();
-        final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
-        sendToBack(view, figures);
+        sendToBack(super.getView(), figures.get(0));
         fireUndoableEditHappened(new AbstractUndoableEdit() {
             private static final long serialVersionUID = 1L;
 
@@ -64,10 +64,9 @@ public class SendToBackAction extends AbstractSelectedAction {
         });
     }
 
-    public static void sendToBack(DrawingView view, Collection<Figure> figures) {
-        Drawing drawing = view.getDrawing();
-        for (Figure figure : figures) { // XXX Shouldn't the figures be sorted here back to front?
-            drawing.sendToBack(figure);
-        }
+    @Override
+    public void sendToBack(DrawingView view, Figure figure) {
+        view.sendToBack(figure);
     }
+
 }

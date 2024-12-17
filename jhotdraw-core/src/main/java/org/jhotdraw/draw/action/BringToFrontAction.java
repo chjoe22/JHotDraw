@@ -37,9 +37,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
-        final DrawingView view = getView();
-        final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
-        bringToFront(view, figures);
+        bringToFront(super.getView(), );
         fireUndoableEditHappened(new AbstractUndoableEdit() {
             private static final long serialVersionUID = 1L;
 
@@ -64,10 +62,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
         });
     }
 
-    public static void bringToFront(DrawingView view, Collection<Figure> figures) {
-        Drawing drawing = view.getDrawing();
-        for (Figure figure : drawing.sort(figures)) {
-            drawing.bringToFront(figure);
-        }
+    public static void bringToFront(DrawingView view, Figure figure) {
+        view.sendToFront(figure);
     }
 }
