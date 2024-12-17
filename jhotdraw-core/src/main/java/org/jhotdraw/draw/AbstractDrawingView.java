@@ -152,6 +152,8 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
         }
     }
 
+
+
     /**
      * Draws the background of the drawing view.
      */
