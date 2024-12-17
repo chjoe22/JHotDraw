@@ -46,7 +46,6 @@ public abstract class AbstractSelectedAction
     private static final long serialVersionUID = 1L;
     private DrawingEditor editor;
     transient private DrawingView activeView;
-    private List<Figure> figures = new ArrayList<>();
 
     public abstract void sendToBack(DrawingView view, Figure figure);
 
@@ -84,9 +83,7 @@ public abstract class AbstractSelectedAction
     };
     private EventHandler eventHandler = new EventHandler();
 
-    public List<Figure> getFigures() {
-        return figures;
-    }
+    private List<Figure> figures = new ArrayList<>();
 
     public void sendToBack(Figure figure){
         if (figures.contains(figure)) {
@@ -101,6 +98,9 @@ public abstract class AbstractSelectedAction
         }
     }
 
+    public Drawing getDrawing(Figure figure) {
+        return getView().getDrawing();
+    }
 
 
     /**
