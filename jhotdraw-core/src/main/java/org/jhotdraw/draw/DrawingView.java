@@ -515,7 +515,7 @@ public interface DrawingView {
 
     public void removeMouseWheelListener(MouseWheelListener l);
 
-    void sendToBack(Figure figure);
+    void sendToBack(DrawingView view, Figure figure);
 
     void sendToFront(Figure figure);
 }

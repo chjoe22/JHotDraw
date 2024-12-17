@@ -7,6 +7,9 @@
  */
 package org.jhotdraw.draw;
 
+import org.jhotdraw.draw.action.ArrangeLayer;
+import org.jhotdraw.draw.action.BringToFrontAction;
+import org.jhotdraw.draw.action.SendToBackAction;
 import org.jhotdraw.draw.figure.Figure;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +17,7 @@ import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.undo.*;
 import org.jhotdraw.api.gui.EditableComponent;
@@ -135,6 +139,14 @@ public class DefaultDrawingView
         if (r != null) {
             repaint(r);
         }
+    public void handleSendToBack(Figure figure) {
+        ArrangeLayer command = new SendToBackAction();
+        command.execute(editor.getActiveView(), figure);
+    }
+
+    public void handleBringToFront(Figure figure) {
+        ArrangeLayer command = new BringToFrontAction();
+        command.execute(editor.getActiveView(), figure);
     }
 
     /**
