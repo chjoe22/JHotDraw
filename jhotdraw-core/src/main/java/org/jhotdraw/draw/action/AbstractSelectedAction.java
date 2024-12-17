@@ -9,6 +9,8 @@ package org.jhotdraw.draw.action;
 
 import java.beans.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.undo.*;
 import org.jhotdraw.api.app.Disposable;
@@ -18,6 +20,7 @@ import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.event.FigureSelectionEvent;
 import org.jhotdraw.draw.event.FigureSelectionListener;
+import org.jhotdraw.draw.figure.Figure;
 
 /**
  * This abstract class can be extended to implement an {@code Action} that acts
@@ -43,6 +46,9 @@ public abstract class AbstractSelectedAction
     private static final long serialVersionUID = 1L;
     private DrawingEditor editor;
     transient private DrawingView activeView;
+    private List<Figure> figures = new ArrayList<>();
+
+    public abstract void sendToBack(DrawingView view, Figure figure);
 
     private class EventHandler implements PropertyChangeListener, FigureSelectionListener, Serializable {
 
@@ -77,6 +83,25 @@ public abstract class AbstractSelectedAction
         }
     };
     private EventHandler eventHandler = new EventHandler();
+
+    public List<Figure> getFigures() {
+        return figures;
+    }
+
+    public void sendToBack(Figure figure){
+        if (figures.contains(figure)) {
+            figures.remove(figure);
+            figures.add(0, figure);
+        }
+    }
+    public void sendToFront(Figure figure){
+        if (figures.contains(figure)) {
+            figures.remove(figure);
+            figures.add(1, figure);
+        }
+    }
+
+
 
     /**
      * Creates an action which acts on the selected figures on the current view
