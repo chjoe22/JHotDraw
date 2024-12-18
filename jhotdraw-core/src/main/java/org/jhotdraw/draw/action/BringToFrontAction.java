@@ -23,6 +23,6 @@ public class BringToFrontAction implements ArrangeLayer{
 
     @Override
     public void execute(DrawingView view, Figure figure) {
-        view.sendToFront(figure);
+        view.sendToFront(view, figure);
     }
 }
