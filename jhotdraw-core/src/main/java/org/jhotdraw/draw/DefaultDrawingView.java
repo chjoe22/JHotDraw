@@ -131,7 +131,7 @@ public class DefaultDrawingView
     public void sendToFront(DrawingView view, Figure figure) {
         if (figures.contains(figure)) {
             figures.remove(figure);
-            figures.add(1, figure);
+            figures.add(figures.size(), figure);
         }
     }
 
