@@ -1,0 +1,29 @@
+name: CI Lab with Maven
+
+on:
+  push:
+    branches: [ "feature/Arrangement-of-figures" ]
+  pull_request:
+    branches: [ "feature/Arrangement-of-figures" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout JHotDraw
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build Maven
+        env:
+          USER_NAME: ${{ github.actor }}
+          TOKEN: ${{ github.token }}
+        run: mvn clean install -DskipTests -s .maven-settings.xml -f pom.xml
