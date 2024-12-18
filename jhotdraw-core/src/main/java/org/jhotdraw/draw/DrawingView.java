@@ -517,5 +517,5 @@ public interface DrawingView {
 
     void sendToBack(DrawingView view, Figure figure);
 
-    void sendToFront(Figure figure);
+    void sendToFront(DrawingView view, Figure figure);
 }

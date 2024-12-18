@@ -74,10 +74,16 @@ public class DefaultDrawingEditor extends AbstractBean implements DrawingEditor 
             }
         }
     }
-    public void handleSendToBack(Figure figure) {
-        ArrangeLayer command = new SendToBackAction(this);
-        command.execute(getActiveView(), figure);
+
+    public void handleSendToFront(Figure figure) {
+        new BringToFrontAction().execute(getActiveView(), figure);
     }
+
+    public void handleSendToBack (Figure figure) {
+        new SendToBackAction().execute(getActiveView(), figure);
+    }
+
+
 
     /**
      * The input map of the drawing editor.

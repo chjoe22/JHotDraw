@@ -118,14 +118,30 @@ public class DefaultDrawingView
         IS_WINDOWS = b;
     }
 
-    public void handleSendToBack(Figure figure) {
-        ArrangeLayer command = new SendToBackAction();
-        command.execute(editor.getActiveView(), figure);
+    private List<Figure> figures = new ArrayList<>();
+    @Override
+    public void sendToBack(DrawingView view, Figure figure) {
+        if (figures.contains(figure)) {
+            figures.remove(figure);
+            figures.add(0, figure);
+        }
     }
 
-    public void handleBringToFront(Figure figure) {
-        ArrangeLayer command = new BringToFrontAction();
-        command.execute(editor.getActiveView(), figure);
+    @Override
+    public void sendToFront(DrawingView view, Figure figure) {
+        if (figures.contains(figure)) {
+            figures.remove(figure);
+            figures.add(1, figure);
+        }
+    }
+
+    public Drawing getDrawing(Figure figure) {
+        return editor.getActiveView().getDrawing();
+    }
+
+    @Override
+    public void repaintHandles() {
+
     }
 
     /**
