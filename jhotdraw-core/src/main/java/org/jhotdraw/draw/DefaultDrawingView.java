@@ -119,7 +119,8 @@ public class DefaultDrawingView
     }
 
     private List<Figure> figures = new ArrayList<>();
-    @Override
+
+
     public void sendToBack(DrawingView view, Figure figure) {
         if (figures.contains(figure)) {
             figures.remove(figure);
@@ -127,7 +128,7 @@ public class DefaultDrawingView
         }
     }
 
-    @Override
+
     public void sendToFront(DrawingView view, Figure figure) {
         if (figures.contains(figure)) {
             figures.remove(figure);
@@ -135,8 +136,9 @@ public class DefaultDrawingView
         }
     }
 
-    public Drawing getDrawing(Figure figure) {
-        return editor.getActiveView().getDrawing();
+    public Drawing getDrawing(DrawingView view)
+    {
+        return view.getDrawing();
     }
 
     @Override
