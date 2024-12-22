@@ -37,4 +37,22 @@ public class DefaultDrawingViewTest {
         assertEquals(figure1, figures.get(1));
         assertEquals(figure3, figures.get(2));
     }
+
+
+    //Boundary test
+    @Test
+    public void testSendToBackWithEmptyList(){
+        DefaultDrawingView emptyDrawingView = new DefaultDrawingView();
+        Figure figure = new RectangleFigure();
+        emptyDrawingView.getDrawing().add(figure);
+
+        //Send the single figure to back
+        emptyDrawingView.sendToBack(emptyDrawingView, figure);
+
+        // Verify the figure is still in the drawing and in the correct position
+        ArrayList<Figure> figures = new ArrayList<>(emptyDrawingView.getSelectedFigures());
+        assertEquals(1, figures.size());
+        assertEquals(figure, figures.get(0));
+
+    }
 }
