@@ -32,4 +32,4 @@ jobs:
           USER_NAME: ${{ github.actor }}
           TOKEN: ${{ github.token }}
           DISPLAY: :99
-        run: mvn clean install -DskipTests -Dmaven.compiler.showWarnings=false
+        run: mvn clean compile -Dmaven.compiler.showWarnings=false
