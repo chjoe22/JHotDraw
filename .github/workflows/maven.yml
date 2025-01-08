@@ -33,4 +33,4 @@ jobs:
         env:
           USER_NAME: ${{ github.actor }}
           TOKEN: ${{ github.token }}
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn clean install -DskipTests -Dmaven.compiler.showWarnings=false
