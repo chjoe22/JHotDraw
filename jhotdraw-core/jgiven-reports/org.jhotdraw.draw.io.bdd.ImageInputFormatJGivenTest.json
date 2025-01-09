@@ -1,0 +1,223 @@
+{
+  "className": "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest",
+  "name": "Image Input Format J Given",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest",
+      "testMethodName": "testImageInputFormatFailsToReadInvalidImage",
+      "description": "Test image input format fails to read invalid image",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 4380300
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.UnsupportedClassVersionError: org/mockito/Mockito has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0",
+          "stackTrace": [
+            "java.lang.ClassLoader.defineClass1(Native Method)",
+            "java.lang.ClassLoader.defineClass(Unknown Source)",
+            "java.security.SecureClassLoader.defineClass(Unknown Source)",
+            "java.net.URLClassLoader.defineClass(Unknown Source)",
+            "java.net.URLClassLoader.access$100(Unknown Source)",
+            "java.net.URLClassLoader$1.run(Unknown Source)",
+            "java.net.URLClassLoader$1.run(Unknown Source)",
+            "java.security.AccessController.doPrivileged(Native Method)",
+            "java.net.URLClassLoader.findClass(Unknown Source)",
+            "java.lang.ClassLoader.loadClass(Unknown Source)",
+            "sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)",
+            "java.lang.ClassLoader.loadClass(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat.an_image_input_format(ImageInputFormatJGivenTest.java:43)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv.an_image_input_format$accessor$eRTc1hGw(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv$auxiliary$EbSDB5RG.call(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv.an_image_input_format(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest.testImageInputFormatFailsToReadInvalidImage(ImageInputFormatJGivenTest.java:26)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)",
+            "org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:520)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:748)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:443)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:211)"
+          ],
+          "durationInNanos": 27040900
+        }
+      ],
+      "durationInNanos": 27040900
+    },
+    {
+      "className": "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest",
+      "testMethodName": "testImageInputFormatReadsImage",
+      "description": "Test image input format reads image",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 368700
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.UnsupportedClassVersionError: org/mockito/Mockito has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0",
+          "stackTrace": [
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat.an_image_input_format(ImageInputFormatJGivenTest.java:43)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv.an_image_input_format$accessor$eRTc1hGw(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv$auxiliary$EbSDB5RG.call(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv.an_image_input_format(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest.testImageInputFormatReadsImage(ImageInputFormatJGivenTest.java:19)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)",
+            "org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:520)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:748)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:443)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:211)"
+          ],
+          "durationInNanos": 829300
+        }
+      ],
+      "durationInNanos": 829300
+    },
+    {
+      "className": "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest",
+      "testMethodName": "testImageInputFormatHandlesNullInput",
+      "description": "Test image input format handles null input",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 252500
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.UnsupportedClassVersionError: org/mockito/Mockito has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0",
+          "stackTrace": [
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat.an_image_input_format(ImageInputFormatJGivenTest.java:43)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv.an_image_input_format$accessor$eRTc1hGw(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv$auxiliary$EbSDB5RG.call(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest$GivenImageInputFormat$ByteBuddy$KsmPqsMv.an_image_input_format(Unknown Source)",
+            "org.jhotdraw.draw.io.bdd.ImageInputFormatJGivenTest.testImageInputFormatHandlesNullInput(ImageInputFormatJGivenTest.java:33)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)",
+            "org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:520)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:748)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:443)",
+            "org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:211)"
+          ],
+          "durationInNanos": 626400
+        }
+      ],
+      "durationInNanos": 626400
+    }
+  ],
+  "tagMap": {}
+}

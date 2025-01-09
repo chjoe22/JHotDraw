@@ -1,0 +1,579 @@
+{
+  "className": "org.jhotdraw.draw.io.ImageInputFormatJGivenTest",
+  "name": "Image Input Format J Given",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.io.ImageInputFormatJGivenTest",
+      "testMethodName": "testReadFromFile",
+      "description": "Test read from file",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 42100
+            },
+            {
+              "name": "a file with an image",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a file with an image"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 28600
+            },
+            {
+              "name": "when prototype is cloned",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "when prototype is cloned"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 22300
+            },
+            {
+              "name": "when image is loaded",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "when image is loaded"
+                },
+                {
+                  "value": "path\\to\\image.png",
+                  "argumentInfo": {
+                    "argumentName": "file",
+                    "formattedValue": "path\\to\\image.png"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 4389400
+            },
+            {
+              "name": "the image is read from the file",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the image is read from the file"
+                }
+              ],
+              "status": "FAILED",
+              "durationInNanos": 5132800
+            },
+            {
+              "name": "the drawing contains an image holder figure",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the drawing contains an image holder figure"
+                }
+              ],
+              "status": "SKIPPED",
+              "durationInNanos": 0
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.NullPointerException: Cannot invoke \"java.awt.image.BufferedImage.getWidth()\" because the return value of \"org.jhotdraw.draw.figure.ImageHolderFigure.getBufferedImage()\" is null",
+          "stackTrace": [
+            "org.jhotdraw.draw.io.ImageInputFormat.setFigureBounds(ImageInputFormat.java:135)",
+            "org.jhotdraw.draw.io.ImageInputFormat.createImageHolder(ImageInputFormat.java:120)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:103)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:108)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:94)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage.the_image_is_read_from_the_file(ImageInputFormatJGivenTest.java:85)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_image_is_read_from_the_file$accessor$XLOfbJNr(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5$auxiliary$C0bAR4aj.call(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_image_is_read_from_the_file(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest.testReadFromFile(ImageInputFormatJGivenTest.java:134)",
+            "java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.junit.runner.JUnitCore.run(JUnitCore.java:137)",
+            "com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)",
+            "com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)",
+            "com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)",
+            "com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)"
+          ],
+          "durationInNanos": 695806600
+        }
+      ],
+      "durationInNanos": 695806600
+    },
+    {
+      "className": "org.jhotdraw.draw.io.ImageInputFormatJGivenTest",
+      "testMethodName": "testReadFromFileWithIOException",
+      "description": "Test read from file with i o exception",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 20600
+            },
+            {
+              "name": "a file with invalid image",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a file with invalid image"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 25800
+            },
+            {
+              "name": "when prototype is cloned",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "when prototype is cloned"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 13100
+            },
+            {
+              "name": "when invalid image is loaded",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "when invalid image is loaded"
+                },
+                {
+                  "value": "path\\to\\invalid_image.png",
+                  "argumentInfo": {
+                    "argumentName": "file",
+                    "formattedValue": "path\\to\\invalid_image.png"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1163900
+            },
+            {
+              "name": "the invalid image is read from the file",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the invalid image is read from the file"
+                }
+              ],
+              "status": "FAILED",
+              "durationInNanos": 1603400
+            },
+            {
+              "name": "the drawing does not contain any figures",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the drawing does not contain any figures"
+                }
+              ],
+              "status": "SKIPPED",
+              "durationInNanos": 0
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.NullPointerException: Cannot invoke \"java.awt.image.BufferedImage.getWidth()\" because the return value of \"org.jhotdraw.draw.figure.ImageHolderFigure.getBufferedImage()\" is null",
+          "stackTrace": [
+            "org.jhotdraw.draw.io.ImageInputFormat.setFigureBounds(ImageInputFormat.java:135)",
+            "org.jhotdraw.draw.io.ImageInputFormat.createImageHolder(ImageInputFormat.java:120)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:103)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:108)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:94)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage.the_invalid_image_is_read_from_the_file(ImageInputFormatJGivenTest.java:92)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_invalid_image_is_read_from_the_file$accessor$XLOfbJNr(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5$auxiliary$YcY0WeGH.call(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_invalid_image_is_read_from_the_file(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest.testReadFromFileWithIOException(ImageInputFormatJGivenTest.java:162)",
+            "java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.junit.runner.JUnitCore.run(JUnitCore.java:137)",
+            "com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)",
+            "com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)",
+            "com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)",
+            "com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)"
+          ],
+          "durationInNanos": 8835900
+        }
+      ],
+      "durationInNanos": 8835900
+    },
+    {
+      "className": "org.jhotdraw.draw.io.ImageInputFormatJGivenTest",
+      "testMethodName": "testReadFromNonExistentFile",
+      "description": "Test read from non existent file",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 18300
+            },
+            {
+              "name": "a non existent file",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a non existent file"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 91900
+            },
+            {
+              "name": "the non existent image is read from the file",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the non existent image is read from the file"
+                }
+              ],
+              "status": "FAILED",
+              "durationInNanos": 1490500
+            },
+            {
+              "name": "the drawing does not contain any figures",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the drawing does not contain any figures"
+                }
+              ],
+              "status": "SKIPPED",
+              "durationInNanos": 0
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.NullPointerException: Cannot invoke \"org.jhotdraw.draw.figure.ImageHolderFigure.loadImage(java.io.File)\" because \"figure\" is null",
+          "stackTrace": [
+            "org.jhotdraw.draw.io.ImageInputFormat.createImageHolder(ImageInputFormat.java:119)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:103)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:108)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:94)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage.the_non_existent_image_is_read_from_the_file(ImageInputFormatJGivenTest.java:102)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_non_existent_image_is_read_from_the_file$accessor$XLOfbJNr(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5$auxiliary$R4c7ZNLf.call(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_non_existent_image_is_read_from_the_file(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest.testReadFromNonExistentFile(ImageInputFormatJGivenTest.java:152)",
+            "java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.junit.runner.JUnitCore.run(JUnitCore.java:137)",
+            "com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)",
+            "com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)",
+            "com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)",
+            "com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)"
+          ],
+          "durationInNanos": 3517700
+        }
+      ],
+      "durationInNanos": 3517700
+    },
+    {
+      "className": "org.jhotdraw.draw.io.ImageInputFormatJGivenTest",
+      "testMethodName": "testReadFromInvalidFile",
+      "description": "Test read from invalid file",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "an image input format",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "an image input format"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 13300
+            },
+            {
+              "name": "a file with invalid image",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a file with invalid image"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 16400
+            },
+            {
+              "name": "when prototype is cloned",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "when prototype is cloned"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 20800
+            },
+            {
+              "name": "when invalid image is loaded",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "when invalid image is loaded"
+                },
+                {
+                  "value": "path\\to\\invalid_image.png",
+                  "argumentInfo": {
+                    "argumentName": "file",
+                    "formattedValue": "path\\to\\invalid_image.png"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1091900
+            },
+            {
+              "name": "the invalid image is read from the file",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the invalid image is read from the file"
+                }
+              ],
+              "status": "FAILED",
+              "durationInNanos": 1761100
+            },
+            {
+              "name": "the drawing does not contain any figures",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the drawing does not contain any figures"
+                }
+              ],
+              "status": "SKIPPED",
+              "durationInNanos": 0
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "FAILED",
+          "errorMessage": "java.lang.NullPointerException: Cannot invoke \"java.awt.image.BufferedImage.getWidth()\" because the return value of \"org.jhotdraw.draw.figure.ImageHolderFigure.getBufferedImage()\" is null",
+          "stackTrace": [
+            "org.jhotdraw.draw.io.ImageInputFormat.setFigureBounds(ImageInputFormat.java:135)",
+            "org.jhotdraw.draw.io.ImageInputFormat.createImageHolder(ImageInputFormat.java:120)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:103)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:108)",
+            "org.jhotdraw.draw.io.ImageInputFormat.read(ImageInputFormat.java:94)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage.the_invalid_image_is_read_from_the_file(ImageInputFormatJGivenTest.java:92)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_invalid_image_is_read_from_the_file$accessor$XLOfbJNr(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5$auxiliary$YcY0WeGH.call(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest$WhenStage$ByteBuddy$dFeNqOq5.the_invalid_image_is_read_from_the_file(Unknown Source)",
+            "org.jhotdraw.draw.io.ImageInputFormatJGivenTest.testReadFromInvalidFile(ImageInputFormatJGivenTest.java:144)",
+            "java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+            "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)",
+            "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)",
+            "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)",
+            "org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)",
+            "com.tngtech.jgiven.junit.JGivenMethodRule$1.evaluate(JGivenMethodRule.java:73)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)",
+            "org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)",
+            "org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)",
+            "org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)",
+            "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)",
+            "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)",
+            "org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)",
+            "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)",
+            "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)",
+            "org.junit.rules.RunRules.evaluate(RunRules.java:20)",
+            "org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)",
+            "org.junit.runners.ParentRunner.run(ParentRunner.java:413)",
+            "org.junit.runner.JUnitCore.run(JUnitCore.java:137)",
+            "com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)",
+            "com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)",
+            "com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)",
+            "com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)",
+            "com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)"
+          ],
+          "durationInNanos": 5945400
+        }
+      ],
+      "durationInNanos": 5945400
+    }
+  ],
+  "tagMap": {}
+}
