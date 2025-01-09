@@ -67,163 +67,157 @@ public class FillToolBar extends AbstractToolBar {
 
     @Override
     protected JComponent createDisclosedComponent(int state) {
-        JPanel p = null;
         switch (state) {
             case 1:
-                p = new JPanel();
-                p.setOpaque(false);
-                p.setBorder(new EmptyBorder(5, 5, 5, 8));
-                // Abort if no editor is put
-                if (editor == null) {
-                    break;
-                }
-                ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
-                GridBagLayout layout = new GridBagLayout();
-                p.setLayout(layout);
-                GridBagConstraints gbc;
-                AbstractButton btn;
-                // Fill color
-                Map<AttributeKey<?>, Object> defaultAttributes = new HashMap<AttributeKey<?>, Object>();
-                FILL_GRADIENT.put(defaultAttributes, null);
-                /*
-                btn = ButtonFactory.createSelectionColorButton(editor,
-                FILL_COLOR, ButtonFactory.HSB_COLORS_AS_RGB, ButtonFactory.HSB_COLORS_AS_RGB_COLUMN_COUNT,
-                "attribute.fillColor", labels, defaultAttributes, new Rectangle(3, 3, 10, 10), disposables);
-                 *
-                 */
-                btn = ButtonFactory.createSelectionColorChooserButton(editor,
-                        FILL_COLOR, "attribute.fillColor", labels,
-                        defaultAttributes, new Rectangle(3, 3, 10, 10), PaletteColorChooserUI.class, disposables);
-                btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
-                //((JPopupButton) btn).setAction(null, null);
-                gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.gridwidth = 2;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p.add(btn, gbc);
-                // Opacity slider
-                JPopupButton opacityPopupButton = new JPopupButton();
-                JAttributeSlider opacitySlider = new JAttributeSlider(JSlider.VERTICAL, 0, 100, 100);
-                opacityPopupButton.add(opacitySlider);
-                labels.configureToolBarButton(opacityPopupButton, "attribute.fillOpacity");
-                opacityPopupButton.setUI((PaletteButtonUI) PaletteButtonUI.createUI(opacityPopupButton));
-                opacityPopupButton.setIcon(
-                        new SelectionOpacityIcon(editor, FILL_OPACITY, FILL_COLOR, null, Images.createImage(getClass(), labels.getString("attribute.fillOpacity.largeIcon")),
-                                new Rectangle(5, 5, 6, 6), new Rectangle(4, 4, 7, 7)));
-                opacityPopupButton.setPopupAnchor(SOUTH_EAST);
-                disposables.add(new SelectionComponentRepainter(editor, opacityPopupButton));
-                gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc.weighty = 1f;
-                gbc.insets = new Insets(3, 0, 0, 0);
-                p.add(opacityPopupButton, gbc);
-                opacitySlider.setUI((SliderUI) PaletteSliderUI.createUI(opacitySlider));
-                opacitySlider.setScaleFactor(100d);
-                disposables.add(new FigureAttributeEditorHandler<Double>(FILL_OPACITY, opacitySlider, editor));
-            
-            break;
-            case 2: 
-                p = new JPanel();
-                p.setOpaque(false);
-                // Abort if no editor is put
-                if (editor == null) {
-                    break;
-                }
-                JPanel p1 = new JPanel(new GridBagLayout());
-                JPanel p2 = new JPanel(new GridBagLayout());
-                JPanel p3 = new JPanel(new GridBagLayout());
-                p1.setOpaque(false);
-                p2.setOpaque(false);
-                p3.setOpaque(false);
-                p.setBorder(new EmptyBorder(5, 5, 5, 8));
-                p.removeAll();
-                labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
-                layout = new GridBagLayout();
-                p.setLayout(layout);
-                // Fill color field and button
-                defaultAttributes = new HashMap<AttributeKey<?>, Object>();
-                FILL_GRADIENT.put(defaultAttributes, null);
-                JAttributeTextField<Color> colorField = new JAttributeTextField<Color>();
-                colorField.setColumns(7);
-                colorField.setToolTipText(labels.getString("attribute.fillColor.toolTipText"));
-                colorField.putClientProperty("Palette.Component.segmentPosition", "first");
-                colorField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(colorField));
-                colorField.setFormatterFactory(ColorFormatter.createFormatterFactory(ColorFormatter.Format.RGB_INTEGER_SHORT, false, false));
-                colorField.setHorizontalAlignment(JTextField.LEFT);
-                disposables.add(new FigureAttributeEditorHandler<Color>(FILL_COLOR, defaultAttributes, colorField, editor, true));
-                gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p1.add(colorField, gbc);
-                btn = ButtonFactory.createSelectionColorChooserButton(editor,
-                        FILL_COLOR, "attribute.fillColor", labels,
-                        defaultAttributes, new Rectangle(3, 3, 10, 10), PaletteColorChooserUI.class, disposables);
-                btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
-                //((JPopupButton) btn).setAction(null, null);
-                gbc = new GridBagConstraints();
-                gbc.gridx = 1;
-                gbc.gridwidth = 2;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p1.add(btn, gbc);
-                // Opacity field with slider
-                JAttributeTextField<Double> opacityField = new JAttributeTextField<Double>();
-                opacityField.setColumns(4);
-                opacityField.setToolTipText(labels.getString("attribute.fillOpacity.toolTipText"));
-                opacityField.putClientProperty("Palette.Component.segmentPosition", "first");
-                opacityField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(opacityField));
-                JavaNumberFormatter formatter = new JavaNumberFormatter(0d, 100d, 100d, false, "%");
-                formatter.setUsesScientificNotation(false);
-                formatter.setMaximumFractionDigits(1);
-                opacityField.setFormatterFactory(new DefaultFormatterFactory(formatter));
-                opacityField.setHorizontalAlignment(JTextField.LEFT);
-                disposables.add(new FigureAttributeEditorHandler<Double>(FILL_OPACITY, opacityField, editor));
-                gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.insets = new Insets(3, 0, 0, 0);
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p2.add(opacityField, gbc);
-                opacityPopupButton = new JPopupButton();
-                opacitySlider = new JAttributeSlider(JSlider.VERTICAL, 0, 100, 100);
-                opacityPopupButton.add(opacitySlider);
-                labels.configureToolBarButton(opacityPopupButton, "attribute.fillOpacity");
-                opacityPopupButton.setUI((PaletteButtonUI) PaletteButtonUI.createUI(opacityPopupButton));
-                opacityPopupButton.setPopupAnchor(SOUTH_EAST);
-                opacityPopupButton.setIcon(
-                        new SelectionOpacityIcon(editor, FILL_OPACITY, FILL_COLOR, null, Images.createImage(getClass(), labels.getString("attribute.fillOpacity.largeIcon")),
-                                new Rectangle(5, 5, 6, 6), new Rectangle(4, 4, 7, 7)));
-                opacityPopupButton.setPopupAnchor(SOUTH_EAST);
-                disposables.add(new SelectionComponentRepainter(editor, opacityPopupButton));
-                gbc = new GridBagConstraints();
-                gbc.gridx = 1;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc.weighty = 1f;
-                gbc.insets = new Insets(3, 0, 0, 0);
-                p2.add(opacityPopupButton, gbc);
-                opacitySlider.setUI((SliderUI) PaletteSliderUI.createUI(opacitySlider));
-                opacitySlider.setScaleFactor(100d);
-                disposables.add(new FigureAttributeEditorHandler<Double>(FILL_OPACITY, opacitySlider, editor));
-                // Add horizontal strips
-                gbc = new GridBagConstraints();
-                gbc.gridy = 0;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p.add(p1, gbc);
-                gbc = new GridBagConstraints();
-                gbc.gridy = 1;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p.add(p2, gbc);
-                gbc = new GridBagConstraints();
-                gbc.gridy = 2;
-                gbc.weighty = 1f;
-                gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-                p.add(p3, gbc);
-            
-            break;
+                return createStateOneComponent();
+            case 2:
+                return createStateTwoComponent();
+            default:
+                return new JPanel();
         }
-        return p;
     }
+
+    private JComponent createStateOneComponent() {
+        if (editor == null) {
+            return new JPanel(); // Null check, returning an empty JPanel
+        }
+
+        ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
+        JPanel panel = createDefaultPanel();
+
+        // Setting the Fill color to button
+        AbstractButton fillColorButton = createFillColorButton(labels);
+        panel.add(fillColorButton, createGridBagConstraints(0, 2, GridBagConstraints.FIRST_LINE_START));
+
+        // Setting the opacity slider
+        JPopupButton opacityPopupButton = createOpacitySliderButton(labels);
+        panel.add(opacityPopupButton, createGridBagConstraints(0, 1, GridBagConstraints.FIRST_LINE_START));
+
+        return panel;
+    }
+
+    private JComponent createStateTwoComponent() {
+        if (editor == null) {
+            return new JPanel(); //Null check, returning an empty JPanel
+        }
+
+        ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
+        JPanel panel = createDefaultPanel();
+
+        // Field and Button for Fill Color
+        JPanel colorPanel = createColorPanel(labels);
+        panel.add(colorPanel, createGridBagConstraints(0, 0, GridBagConstraints.FIRST_LINE_START));
+
+        // Field and slider for Opacity
+        JPanel opacityPanel = createOpacityPanel(labels);
+        panel.add(opacityPanel, createGridBagConstraints(0, 1, GridBagConstraints.FIRST_LINE_START));
+
+        return panel;
+    }
+
+    private JPanel createDefaultPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setOpaque(false);
+        panel.setBorder(new EmptyBorder(5, 5, 5, 8));
+        return panel;
+    }
+
+    private AbstractButton createFillColorButton(ResourceBundleUtil labels) {
+        Map<AttributeKey<?>, Object> defaultAttributes = new HashMap<>();
+        FILL_GRADIENT.put(defaultAttributes, null);
+
+        AbstractButton button = ButtonFactory.createSelectionColorChooserButton(
+                editor,
+                FILL_COLOR,
+                "attribute.fillColor",
+                labels,
+                defaultAttributes,
+                new Rectangle(3, 3, 10, 10),
+                PaletteColorChooserUI.class,
+                disposables
+        );
+        button.setUI((PaletteButtonUI) PaletteButtonUI.createUI(button));
+        return button;
+    }
+
+    private JPopupButton createOpacitySliderButton(ResourceBundleUtil labels) {
+        JPopupButton popupButton = new JPopupButton();
+        JAttributeSlider slider = new JAttributeSlider(JSlider.VERTICAL, 0, 100, 100);
+        popupButton.add(slider);
+
+        labels.configureToolBarButton(popupButton, "attribute.fillOpacity");
+        popupButton.setUI((PaletteButtonUI) PaletteButtonUI.createUI(popupButton));
+        popupButton.setIcon(new SelectionOpacityIcon(
+                editor, FILL_OPACITY, FILL_COLOR, null,
+                Images.createImage(getClass(), labels.getString("attribute.fillOpacity.largeIcon")),
+                new Rectangle(5, 5, 6, 6), new Rectangle(4, 4, 7, 7)
+        ));
+        popupButton.setPopupAnchor(SOUTH_EAST);
+
+        slider.setUI((SliderUI) PaletteSliderUI.createUI(slider));
+        slider.setScaleFactor(100d);
+
+        disposables.add(new SelectionComponentRepainter(editor, popupButton));
+        disposables.add(new FigureAttributeEditorHandler<>(FILL_OPACITY, slider, editor));
+
+        return popupButton;
+    }
+
+    private JPanel createColorPanel(ResourceBundleUtil labels) {
+        JPanel colorPanel = new JPanel(new GridBagLayout());
+        colorPanel.setOpaque(false);
+
+        // Setting Field for Color
+        JAttributeTextField<Color> colorField = new JAttributeTextField<>();
+        colorField.setColumns(7);
+        colorField.setToolTipText(labels.getString("attribute.fillColor.toolTipText"));
+        colorField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(colorField));
+        colorField.setFormatterFactory(ColorFormatter.createFormatterFactory(ColorFormatter.Format.RGB_INTEGER_SHORT, false, false));
+        colorField.setHorizontalAlignment(JTextField.LEFT);
+
+        disposables.add(new FigureAttributeEditorHandler<>(FILL_COLOR, new HashMap<>(), colorField, editor, true));
+        colorPanel.add(colorField, createGridBagConstraints(0, 1, GridBagConstraints.FIRST_LINE_START));
+
+        // adding Color button to panel
+        AbstractButton colorButton = createFillColorButton(labels);
+        colorPanel.add(colorButton, createGridBagConstraints(1, 2, GridBagConstraints.FIRST_LINE_START));
+
+        return colorPanel;
+    }
+
+    private JPanel createOpacityPanel(ResourceBundleUtil labels) {
+        JPanel opacityPanel = new JPanel(new GridBagLayout());
+        opacityPanel.setOpaque(false);
+
+        // Setting field for Opacity
+        JAttributeTextField<Double> opacityField = new JAttributeTextField<>();
+        opacityField.setColumns(4);
+        opacityField.setToolTipText(labels.getString("attribute.fillOpacity.toolTipText"));
+        opacityField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(opacityField));
+        opacityField.setFormatterFactory(new DefaultFormatterFactory(
+                new JavaNumberFormatter(0d, 100d, 100d, false, "%")
+        ));
+        opacityField.setHorizontalAlignment(JTextField.LEFT);
+
+        disposables.add(new FigureAttributeEditorHandler<>(FILL_OPACITY, opacityField, editor));
+        opacityPanel.add(opacityField, createGridBagConstraints(0, 1, GridBagConstraints.FIRST_LINE_START));
+
+        // Setting slider for Opacity
+        JPopupButton opacityButton = createOpacitySliderButton(labels);
+        opacityPanel.add(opacityButton, createGridBagConstraints(1, 2, GridBagConstraints.FIRST_LINE_START));
+
+        return opacityPanel;
+    }
+
+    private GridBagConstraints createGridBagConstraints(int gridx, int gridwidth, int anchor) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = gridx;
+        gbc.gridwidth = gridwidth;
+        gbc.anchor = anchor;
+        gbc.insets = new Insets(3, 0, 0, 0);
+        return gbc;
+    }
+
 
     @Override
     protected String getID() {
