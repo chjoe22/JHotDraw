@@ -2,15 +2,17 @@ package org.jhotdraw.undo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.logging.Logger;
 
 public abstract class AbstractUndoRedoAction extends AbstractAction {
 
     private static final long serialVersionUID = 1L;
     private final UndoRedoManager manager;
+    protected final Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public AbstractUndoRedoAction(UndoRedoManager undoRedoManager, String ID) {
+    AbstractUndoRedoAction(UndoRedoManager undoRedoManager, String id) {
         this.manager = undoRedoManager;
-        UndoRedoManager.getLabels().configureAction(this, "edit." + ID);
+        UndoRedoManager.getLabels().configureAction(this, "edit." + id);
         setEnabled(false);
     }
 
