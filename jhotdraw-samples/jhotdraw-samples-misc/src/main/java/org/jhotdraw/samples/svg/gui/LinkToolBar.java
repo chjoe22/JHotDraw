@@ -22,6 +22,8 @@ import static org.jhotdraw.samples.svg.SVGAttributeKeys.LINK;
 public class LinkToolBar extends AbstractToolBar {
 
     private static final long serialVersionUID = 1L;
+    private static final Insets DEFAULT_INSETS = new Insets(3, 0, 0, 0);
+
     private SelectionComponentDisplayer displayer;
     private ResourceBundle labels;
 
@@ -35,20 +37,14 @@ public class LinkToolBar extends AbstractToolBar {
     public void setEditor(DrawingEditor newValue) {
         if (displayer != null) {
             displayer.dispose();
-            displayer = null;
         }
         super.setEditor(newValue);
-        if (newValue != null) {
-            displayer = new SelectionComponentDisplayer(editor, this);
-        }
+        displayer = (newValue != null) ? new SelectionComponentDisplayer(editor, this) : null;
     }
 
     @Override
     protected JComponent createDisclosedComponent(int state) {
-        JPanel panel = new JPanel();
-        panel.setOpaque(false);
-        panel.setLayout(new GridBagLayout());
-        panel.setBorder(new EmptyBorder(5, 5, 5, 8));
+        JPanel panel = createPanel();
 
         if (editor == null) {
             return panel;
@@ -56,91 +52,92 @@ public class LinkToolBar extends AbstractToolBar {
 
         switch (state) {
             case 1:
-                addLinkComponents(panel, 8, 2);
-                addTargetComponents(panel, 4);
+                configurePanel(panel, 8, 2, 4);
                 break;
             case 2:
-                addLinkComponents(panel, 12, 2);
-                addTargetComponents(panel, 7);
+                configurePanel(panel, 12, 2, 7);
                 break;
         }
 
         return panel;
     }
 
-    private void addLinkComponents(JPanel panel, int columns, int rows) {
-        GridBagConstraints gbc = new GridBagConstraints();
+    private void configurePanel(JPanel panel, int linkColumns, int linkRows, int targetColumns) {
+        addLinkComponents(panel, linkColumns, linkRows);
+        addTargetComponents(panel, targetColumns);
+    }
 
+    private JPanel createPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setOpaque(false);
+        panel.setBorder(new EmptyBorder(5, 5, 5, 8));
+        return panel;
+    }
+
+    public void addLinkComponents(JPanel panel, int columns, int rows) {
+        GridBagConstraints gbc = createGridBagConstraints(0, 0, GridBagConstraints.SOUTHWEST);
         JLabel linkLabel = createLabel("attribute.figureLink");
-        gbc.gridx = 0;
-        gbc.insets = new Insets(-2, 0, -2, 0);
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
         panel.add(linkLabel, gbc);
 
-        JScrollPane scrollPane = new JScrollPane();
+        JAttributeTextArea<String> linkField = createTextArea(columns, rows, "attribute.figureLink.toolTipText");
+        JScrollPane scrollPane = createScrollPane(linkField);
+
+        gbc = createGridBagConstraints(0, 1, GridBagConstraints.BOTH);
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        panel.add(scrollPane, gbc);
+
+        disposables.add(new FigureAttributeEditorHandler<>(LINK, linkField, editor, false));
+    }
+
+    private void addTargetComponents(JPanel panel, int columns) {
+        GridBagConstraints gbc = createGridBagConstraints(0, 2, GridBagConstraints.FIRST_LINE_START);
+        JLabel targetLabel = createLabel("attribute.figureLinkTarget");
+        panel.add(targetLabel, gbc);
+
+        JAttributeTextField<String> targetField = createTextField(columns, "attribute.figureLinkTarget.toolTipText");
+
+        gbc = createGridBagConstraints(1, 2, GridBagConstraints.HORIZONTAL);
+        panel.add(targetField, gbc);
+    }
+
+    private JScrollPane createScrollPane(JAttributeTextArea<String> textArea) {
+        JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.putClientProperty("JComponent.sizeVariant", "small");
         scrollPane.setBorder(PaletteLookAndFeel.getInstance().getBorder("ScrollPane.border"));
-
-        JAttributeTextArea<String> linkField = new JAttributeTextArea<>();
-        linkField.setToolTipText(labels.getString("attribute.figureLink.toolTipText"));
-        linkField.setColumns(columns);
-        linkField.setLineWrap(true);
-        linkField.setRows(rows);
-        linkField.setWrapStyleWord(true);
-        linkField.setFont(PaletteLookAndFeel.getInstance().getFont("SmallSystemFont"));
-        linkField.setFormatterFactory(new DefaultFormatterFactory(new DefaultFormatter()));
-
-        disposables.add(new FigureAttributeEditorHandler<>(LINK, linkField, editor, false));
-        scrollPane.setViewportView(linkField);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(3, 0, 0, 0);
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weightx = 1d;
-        gbc.weighty = 1d;
-        panel.add(scrollPane, gbc);
+        return scrollPane;
     }
 
-    private void addTargetComponents(JPanel panel, int columns) {
-        GridBagConstraints gbc = new GridBagConstraints();
+    private JAttributeTextArea<String> createTextArea(int columns, int rows, String toolTipKey) {
+        JAttributeTextArea<String> textArea = new JAttributeTextArea<>();
+        textArea.setColumns(columns);
+        textArea.setRows(rows);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setToolTipText(labels.getString(toolTipKey));
+        textArea.setFont(PaletteLookAndFeel.getInstance().getFont("SmallSystemFont"));
+        textArea.setFormatterFactory(new DefaultFormatterFactory(new DefaultFormatter()));
+        return textArea;
+    }
 
-        JLabel targetLabel = createLabel("attribute.figureLinkTarget");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.insets = new Insets(3, 0, 0, 0);
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        panel.add(targetLabel, gbc);
+    private JAttributeTextField<String> createTextField(int columns, String toolTipKey) {
+        JAttributeTextField<String> textField = new JAttributeTextField<>();
+        textField.setColumns(columns);
+        textField.setToolTipText(labels.getString(toolTipKey));
+        textField.setFormatterFactory(new DefaultFormatterFactory(new DefaultFormatter()));
 
-        JAttributeTextField<String> targetField = new JAttributeTextField<>();
-        targetField.setToolTipText(labels.getString("attribute.figureLinkTarget.toolTipText"));
-        targetField.setColumns(columns);
-        targetField.setFormatterFactory(new DefaultFormatterFactory(new DefaultFormatter()));
-
-        ComponentUI targetUI = PaletteFormattedTextFieldUI.createUI(targetField);
-        if (targetUI instanceof TextUI) {
-            targetField.setUI((TextUI) targetUI);
+        ComponentUI ui = PaletteFormattedTextFieldUI.createUI(textField);
+        if (ui instanceof TextUI) {
+            textField.setUI((TextUI) ui);
         } else {
             throw new IllegalStateException("PaletteFormattedTextFieldUI.createUI did not return a TextUI instance");
         }
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.insets = new Insets(3, 3, 0, 0);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        panel.add(targetField, gbc);
+        return textField;
     }
 
-    private JLabel createLabel(String key) {
+    public JLabel createLabel(String key) {
         JLabel label = new JLabel();
         label.setUI((LabelUI) PaletteLabelUI.createUI(label));
         label.setToolTipText(labels.getString(key + ".toolTipText"));
@@ -149,9 +146,18 @@ public class LinkToolBar extends AbstractToolBar {
         return label;
     }
 
+    private GridBagConstraints createGridBagConstraints(int gridx, int gridy, int anchor) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+        gbc.insets = DEFAULT_INSETS;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = anchor;
+        return gbc;
+    }
+
     @Override
     protected String getID() {
         return "link";
     }
 }
-
