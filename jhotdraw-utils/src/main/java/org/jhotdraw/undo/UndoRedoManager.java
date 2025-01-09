@@ -7,11 +7,11 @@
  */
 package org.jhotdraw.undo;
 
-import java.awt.event.*;
 import java.beans.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.undo.*;
+
 import org.jhotdraw.util.*;
 
 /**
@@ -21,7 +21,7 @@ import org.jhotdraw.util.*;
  * @author Werner Randelshofer
  * @version $Id$
  */
-public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManager {
+public class UndoRedoManager extends UndoManager {
 
     private static final long serialVersionUID = 1L;
     protected PropertyChangeSupport propertySupport = new PropertyChangeSupport(this);
@@ -44,26 +44,6 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * this flag is true.
      */
     private boolean undoOrRedoInProgress;
-    /**
-     * Sending this UndoableEdit event to the UndoRedoManager
-     * disables the Undo and Redo functions of the manager.
-     */
-    public static final UndoableEdit DISCARD_ALL_EDITS = new AbstractUndoableEdit() {
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public boolean canUndo() {
-            return false;
-        }
-
-        @Override
-        public boolean canRedo() {
-            return false;
-        }
-    };
-
-
-
 
     /**
      * The undo action instance.
@@ -132,7 +112,6 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * Regardless of inProgress, if undoOrRedoInProgress,
      * calls die on each edit that is sent.</p>
      *
-     *
      * @see CompoundEdit#end
      * @see CompoundEdit#addEdit
      */
@@ -174,9 +153,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
     private void updateActions() {
         String label;
         if (DEBUG) {
-            System.out.println("UndoRedoManager@" + hashCode() + ".updateActions "
-                    + editToBeUndone()
-                    + " canUndo=" + canUndo() + " canRedo=" + canRedo());
+            System.out.println("UndoRedoManager@" + hashCode() + ".updateActions " + editToBeUndone() + " canUndo=" + canUndo() + " canRedo=" + canRedo());
         }
         if (canUndo()) {
             undoAction.setEnabled(true);
@@ -204,8 +181,7 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * while undo is in progress.
      */
     @Override
-    public void undo()
-            throws CannotUndoException {
+    public void undo() throws CannotUndoException {
         undoOrRedoInProgress = true;
         try {
             super.undo();
@@ -221,28 +197,10 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * while redo is in progress.
      */
     @Override
-    public void redo()
-            throws CannotUndoException {
+    public void redo() throws CannotUndoException {
         undoOrRedoInProgress = true;
         try {
             super.redo();
-        } finally {
-            undoOrRedoInProgress = false;
-            updateActions();
-        }
-    }
-
-    /**
-     * Undoes or redoes the last edit event.
-     * The UndoRedoManager ignores all incoming UndoableEdit events,
-     * while undo or redo is in progress.
-     */
-    @Override
-    public void undoOrRedo()
-            throws CannotUndoException, CannotRedoException {
-        undoOrRedoInProgress = true;
-        try {
-            super.undoOrRedo();
         } finally {
             undoOrRedoInProgress = false;
             updateActions();
@@ -253,27 +211,11 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
         propertySupport.addPropertyChangeListener(listener);
     }
 
-    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        propertySupport.addPropertyChangeListener(propertyName, listener);
-    }
-
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertySupport.removePropertyChangeListener(listener);
     }
 
-    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        propertySupport.removePropertyChangeListener(propertyName, listener);
-    }
-
     protected void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
-        propertySupport.firePropertyChange(propertyName, oldValue, newValue);
-    }
-
-    protected void firePropertyChange(String propertyName, int oldValue, int newValue) {
-        propertySupport.firePropertyChange(propertyName, oldValue, newValue);
-    }
-
-    protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         propertySupport.firePropertyChange(propertyName, oldValue, newValue);
     }
 }
