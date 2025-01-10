@@ -744,26 +744,28 @@ public class DefaultDrawingView
             System.out.println("DefaultDrawingView" + ".addToSelection(" + figure + ")");
         }
         Set<Figure> oldSelection = new HashSet<>(selectedFigures);
-        if (selectedFigures.add(figure)) {
-            figure.addFigureListener(handleInvalidator);
-            Set<Figure> newSelection = new HashSet<>(selectedFigures);
-            Rectangle invalidatedArea = null;
-            if (handlesAreValid && getEditor() != null) {
-                for (Handle h : figure.createHandles(detailLevel)) {
-                    h.setView(this);
-                    selectionHandles.add(h);
-                    h.addHandleListener(eventHandler);
-                    if (invalidatedArea == null) {
-                        invalidatedArea = h.getDrawingArea();
-                    } else {
-                        invalidatedArea.add(h.getDrawingArea());
-                    }
+        if (!selectedFigures.add(figure))
+            return; //Early return
+
+        figure.addFigureListener(handleInvalidator);
+        Set<Figure> newSelection = new HashSet<>(selectedFigures);
+        Rectangle invalidatedArea = null;
+
+        if (handlesAreValid && getEditor() != null) {
+            for (Handle h : figure.createHandles(detailLevel)) {
+                h.setView(this);
+                selectionHandles.add(h);
+                h.addHandleListener(eventHandler);
+                if (invalidatedArea == null) {
+                    invalidatedArea = h.getDrawingArea();
+                } else {
+                    invalidatedArea.add(h.getDrawingArea());
                 }
             }
-            fireSelectionChanged(oldSelection, newSelection);
-            if (invalidatedArea != null) {
-                repaint(invalidatedArea);
-            }
+        }
+        fireSelectionChanged(oldSelection, newSelection);
+        if (invalidatedArea != null) {
+            repaint(invalidatedArea);
         }
     }
 
@@ -777,29 +779,37 @@ public class DefaultDrawingView
         boolean selectionChanged = false;
         Rectangle invalidatedArea = null;
         for (Figure figure : figures) {
-            if (selectedFigures.add(figure)) {
-                selectionChanged = true;
-                newSelection.add(figure);
-                figure.addFigureListener(handleInvalidator);
-                if (handlesAreValid && getEditor() != null) {
-                    for (Handle h : figure.createHandles(detailLevel)) {
-                        h.setView(this);
-                        selectionHandles.add(h);
-                        h.addHandleListener(eventHandler);
-                        if (invalidatedArea == null) {
-                            invalidatedArea = h.getDrawingArea();
-                        } else {
-                            invalidatedArea.add(h.getDrawingArea());
-                        }
-                    }
+            if (!selectedFigures.add(figure))
+                continue;
+
+            selectionChanged = true;
+            newSelection.add(figure);
+            figure.addFigureListener(handleInvalidator);
+
+            if (!handlesAreValid)
+                continue;
+
+            if (getEditor() == null)
+                continue;
+
+            for (Handle h : figure.createHandles(detailLevel)) {
+                h.setView(this);
+                selectionHandles.add(h);
+                h.addHandleListener(eventHandler);
+                if (invalidatedArea == null) {
+                    invalidatedArea = h.getDrawingArea();
+                } else {
+                    invalidatedArea.add(h.getDrawingArea());
                 }
             }
         }
-        if (selectionChanged) {
-            fireSelectionChanged(oldSelection, newSelection);
-            if (invalidatedArea != null) {
-                repaint(invalidatedArea);
-            }
+
+        if (!selectionChanged)
+            return;
+
+        fireSelectionChanged(oldSelection, newSelection);
+        if (invalidatedArea != null) {
+            repaint(invalidatedArea);
         }
     }
 
