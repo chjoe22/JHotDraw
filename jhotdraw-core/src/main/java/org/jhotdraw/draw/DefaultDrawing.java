@@ -58,104 +58,104 @@ public class DefaultDrawing
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public void draw(Graphics2D graphics) {
         synchronized (getLock()) {
             ensureSorted();
             List<Figure> toDraw = new ArrayList<>(getChildren().size());
-            Rectangle clipRect = g.getClipBounds();
-            double scale = AttributeKeys.getScaleFactorFromGraphics(g);
+            Rectangle clipRect = graphics.getClipBounds();
+            double scale = AttributeKeys.getScaleFactorFromGraphics(graphics);
             for (Figure f : getChildren()) {
                 if (f.getDrawingArea(scale).intersects(clipRect)) {
                     toDraw.add(f);
                 }
             }
-            draw(g, toDraw);
+            draw(graphics, toDraw);
         }
     }
 
-    public void draw(Graphics2D g, Collection<Figure> children) {
-        Rectangle2D clipBounds = g.getClipBounds();
-        double scale = AttributeKeys.getScaleFactorFromGraphics(g);
+    public void draw(Graphics2D graphics, Collection<Figure> children) {
+        Rectangle2D clipBounds = graphics.getClipBounds();
+        double scale = AttributeKeys.getScaleFactorFromGraphics(graphics);
         if (clipBounds != null) {
             for (Figure f : children) {
                 if (f.isVisible() && f.getDrawingArea(scale).intersects(clipBounds)) {
-                    f.draw(g);
+                    f.draw(graphics);
                 }
             }
         } else {
             for (Figure f : children) {
                 if (f.isVisible()) {
-                    f.draw(g);
+                    f.draw(graphics);
                 }
             }
         }
     }
 
     @Override
-    public List<Figure> sort(Collection<? extends Figure> c) {
+    public List<Figure> sort(Collection<? extends Figure> collection) {
         Set<Figure> unsorted = new HashSet<>();
-        unsorted.addAll(c);
-        List<Figure> sorted = new ArrayList<>(c.size());
-        for (Figure f : getChildren()) {
-            if (unsorted.contains(f)) {
-                sorted.add(f);
-                unsorted.remove(f);
+        unsorted.addAll(collection);
+        List<Figure> sorted = new ArrayList<>(collection.size());
+        for (Figure figure : getChildren()) {
+            if (unsorted.contains(figure)) {
+                sorted.add(figure);
+                unsorted.remove(figure);
             }
         }
-        for (Figure f : c) {
-            if (unsorted.contains(f)) {
-                sorted.add(f);
-                unsorted.remove(f);
+        for (Figure figure : collection) {
+            if (unsorted.contains(figure)) {
+                sorted.add(figure);
+                unsorted.remove(figure);
             }
         }
         return sorted;
     }
 
     @Override
-    public Figure findFigure(Point2D.Double p) {
-        for (Figure f : getFiguresFrontToBack()) {
-            if (f.isVisible() && f.contains(p)) {
-                return f;
+    public Figure findFigure(Point2D.Double point) {
+        for (Figure figure : getFiguresFrontToBack()) {
+            if (figure.isVisible() && figure.contains(point)) {
+                return figure;
             }
         }
         return null;
     }
 
     @Override
-    public Figure findFigureExcept(Point2D.Double p, Figure ignore) {
-        for (Figure f : getFiguresFrontToBack()) {
-            if (f != ignore && f.isVisible() && f.contains(p)) {
-                return f;
+    public Figure findFigureExcept(Point2D.Double point, Figure ignore) {
+        for (Figure figure : getFiguresFrontToBack()) {
+            if (figure != ignore && figure.isVisible() && figure.contains(point)) {
+                return figure;
             }
         }
         return null;
     }
 
     @Override
-    public Figure findFigureBehind(Point2D.Double p, Figure figure) {
+    public Figure findFigureBehind(Point2D.Double point, Figure figure) {
         boolean isBehind = false;
-        for (Figure f : getFiguresFrontToBack()) {
+        for (Figure otherFigure : getFiguresFrontToBack()) {
             if (isBehind) {
-                if (f.isVisible() && f.contains(p)) {
-                    return f;
+                if (otherFigure.isVisible() && otherFigure.contains(point)) {
+                    return otherFigure;
                 }
             } else {
-                isBehind = figure == f;
+                isBehind = figure == otherFigure;
             }
         }
         return null;
     }
 
     @Override
-    public Figure findFigureBehind(Point2D.Double p, Collection<? extends Figure> children) {
+    public Figure findFigureBehind(Point2D.Double point, Collection<? extends Figure> children) {
         int inFrontOf = children.size();
-        for (Figure f : getFiguresFrontToBack()) {
+        for (Figure figure : getFiguresFrontToBack()) {
             if (inFrontOf == 0) {
-                if (f.isVisible() && f.contains(p)) {
-                    return f;
+                if (figure.isVisible() && figure.contains(point)) {
+                    return figure;
                 }
             } else {
-                if (children.contains(f)) {
+                if (children.contains(figure)) {
                     inFrontOf--;
                 }
             }
@@ -164,10 +164,10 @@ public class DefaultDrawing
     }
 
     @Override
-    public Figure findFigureExcept(Point2D.Double p, Collection<? extends Figure> ignore) {
-        for (Figure f : getFiguresFrontToBack()) {
-            if (!ignore.contains(f) && f.isVisible() && f.contains(p)) {
-                return f;
+    public Figure findFigureExcept(Point2D.Double point, Collection<? extends Figure> ignore) {
+        for (Figure figure : getFiguresFrontToBack()) {
+            if (!ignore.contains(figure) && figure.isVisible() && figure.contains(point)) {
+                return figure;
             }
         }
         return null;
@@ -176,9 +176,9 @@ public class DefaultDrawing
     @Override
     public List<Figure> findFigures(Rectangle2D.Double bounds) {
         List<Figure> intersection = new LinkedList<>();
-        for (Figure f : getChildren()) {
-            if (f.isVisible() && f.getBounds().intersects(bounds)) {
-                intersection.add(f);
+        for (Figure figure : getChildren()) {
+            if (figure.isVisible() && figure.getBounds().intersects(bounds)) {
+                intersection.add(figure);
             }
         }
         return intersection;
@@ -187,23 +187,23 @@ public class DefaultDrawing
     @Override
     public List<Figure> findFiguresWithin(Rectangle2D.Double bounds) {
         List<Figure> contained = new LinkedList<>();
-        for (Figure f : getChildren()) {
-            Rectangle2D.Double r = f.getBounds();
-            if (f.get(TRANSFORM) != null) {
-                Rectangle2D rt = f.get(TRANSFORM).createTransformedShape(r).getBounds2D();
-                r = (rt instanceof Rectangle2D.Double) ? (Rectangle2D.Double) rt : new Rectangle2D.Double(rt.getX(), rt.getY(), rt.getWidth(), rt.getHeight());
+        for (Figure figure : getChildren()) {
+            Rectangle2D.Double rectangle = figure.getBounds();
+            if (figure.get(TRANSFORM) != null) {
+                Rectangle2D rectangleTransformed = figure.get(TRANSFORM).createTransformedShape(rectangle).getBounds2D();
+                rectangle = (rectangleTransformed instanceof Rectangle2D.Double) ? (Rectangle2D.Double) rectangleTransformed : new Rectangle2D.Double(rectangleTransformed.getX(), rectangleTransformed.getY(), rectangleTransformed.getWidth(), rectangleTransformed.getHeight());
             }
-            if (f.isVisible() && Geom.contains(bounds, r)) {
-                contained.add(f);
+            if (figure.isVisible() && Geom.contains(bounds, rectangle)) {
+                contained.add(figure);
             }
         }
         return contained;
     }
 
     @Override
-    public Figure findFigureInside(Point2D.Double p) {
-        Figure f = findFigure(p);
-        return (f == null) ? null : f.findFigureInside(p);
+    public Figure findFigureInside(Point2D.Double point) {
+        Figure figure = findFigure(point);
+        return (figure == null) ? null : figure.findFigureInside(point);
     }
 
     /**
@@ -245,15 +245,15 @@ public class DefaultDrawing
     }
 
     @Override
-    protected void drawFill(Graphics2D g) {
+    protected void drawFill(Graphics2D graphics) {
     }
 
     @Override
-    protected void drawStroke(Graphics2D g) {
+    protected void drawStroke(Graphics2D graphics) {
     }
 
     @Override
-    public void drawCanvas(Graphics2D g) {
+    public void drawCanvas(Graphics2D graphics) {
         if (get(CANVAS_WIDTH) != null && get(CANVAS_HEIGHT) != null) {
             // Determine canvas color and opacity
             Color canvasColor = get(CANVAS_FILL_COLOR);
@@ -263,10 +263,10 @@ public class DefaultDrawing
                         (canvasColor.getRGB() & 0xffffff)
                         | ((int) (fillOpacity * 255) << 24), true);
                 // Fill the canvas
-                Rectangle2D.Double r = new Rectangle2D.Double(
+                Rectangle2D.Double rectangle = new Rectangle2D.Double(
                         0, 0, get(CANVAS_WIDTH), get(CANVAS_HEIGHT));
-                g.setColor(canvasColor);
-                g.fill(r);
+                graphics.setColor(canvasColor);
+                graphics.fill(rectangle);
             }
         }
     }
