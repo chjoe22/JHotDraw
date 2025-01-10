@@ -6,7 +6,6 @@ import org.jhotdraw.draw.Drawing;
 import org.jhotdraw.draw.io.ImageInputFormat;
 
 import java.io.File;
-import java.io.IOException;
 
 public class WhenImageInputFormat extends Stage<WhenImageInputFormat> {
     @ProvidedScenarioState
@@ -15,8 +14,8 @@ public class WhenImageInputFormat extends Stage<WhenImageInputFormat> {
     @ProvidedScenarioState
     ImageInputFormat imageInputFormat;
 
-    public WhenImageInputFormat the_png_is_imported(File file) throws IOException {
+    public WhenImageInputFormat the_image_is_read_from_file(File file) throws Exception {
         imageInputFormat.read(file.toURI(), drawing);
-        return self();
+        return this;
     }
 }
